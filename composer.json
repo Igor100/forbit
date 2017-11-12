@@ -1,0 +1,21 @@
+{
+  "name": "mydrive",
+  "description": "The testing app for BIT",
+  "keywords": ["PHP", "BICYCLE"],
+  "type": "project",
+  "license": "BSD-3-Clause",
+  "support": {
+    "source": "https://github.com/yiisoft/yii2"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.4.0",
+    "fguillot/simpleLogger": "@stable",
+    "twbs/bootstrap": "4.0.0-beta.2"
+
+  },
+  "config": {
+    "vendor-dir": "core/extensions"
+  }
+
+}

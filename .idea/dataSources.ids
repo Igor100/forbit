@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - craft@localhost" uuid="c9539234-7be8-415c-8a4f-d8ca543349ba">
+    <database-info product="MySQL" version="5.7.19-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="craft"/>
+      <table id="2" parent="1" name="comment"/>
+      <table id="3" parent="1" name="company"/>
+      <table id="4" parent="1" name="companyPerson"/>
+      <table id="5" parent="1" name="landingPage"/>
+      <table id="6" parent="1" name="lpBlock"/>
+      <table id="7" parent="1" name="lpType"/>
+      <table id="8" parent="1" name="lpWidget"/>
+      <table id="9" parent="1" name="migration"/>
+      <table id="10" parent="1" name="person"/>
+      <table id="11" parent="1" name="user"/>
+      <table id="12" parent="1" name="widget"/>
+      <column id="13" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="14" parent="2" name="active">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1) unsigned</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="15" parent="2" name="createdDate">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="16" parent="2" name="model">
+        <mandatory>1</mandatory>
+        <data-type>enum(&apos;company&apos;, &apos;person&apos;, &apos;service&apos;)</data-type>
+      </column>
+      <column id="17" parent="2" name="entityId">
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <column id="18" parent="2" name="name">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="19" parent="2" name="phone">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="20" parent="2" name="email">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="21" parent="2" name="text">
+        <data-type>text</data-type>
+      </column>
+      <index id="22" parent="2" name="K_model_entity_active">
+        <columns>model
+entityId
+active</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="23" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="24" parent="3" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="25" parent="3" name="active">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <column id="26" parent="3" name="isNetwork">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="27" parent="3" name="networkId">
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <column id="28" parent="3" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="29" parent="3" name="slug">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="30" parent="3" name="address">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="31" parent="3" name="lat">
+        <data-type>decimal(18,15)</data-type>
+      </column>
+      <column id="32" parent="3" name="lng">
+        <data-type>decimal(18,15)</data-type>
+      </column>
+      <column id="33" parent="3" name="url">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="34" parent="3" name="description">
+        <data-type>text</data-type>
+      </column>
+      <column id="35" parent="3" name="body">
+        <data-type>text</data-type>
+      </column>
+      <column id="36" parent="3" name="rating">
+        <mandatory>1</mandatory>
+        <data-type>decimal(4,2) unsigned</data-type>
+        <default-expression>&apos;0.00&apos;</default-expression>
+      </column>
+      <column id="37" parent="3" name="sortOrder">
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <index id="38" parent="3" name="K_network">
+        <columns>networkId</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="39" parent="3" name="K_sorting">
+        <columns>sortOrder
+rating</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="40" parent="3" name="UK_slug">
+        <columns>slug</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="41" parent="3" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="42" parent="3" name="UK_slug">
+        <columns>slug</columns>
+        <underlying-index>UK_slug</underlying-index>
+      </key>
+      <column id="43" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="44" parent="4" name="companyId">
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <column id="45" parent="4" name="personId">
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <index id="46" parent="4" name="K_company">
+        <columns>companyId</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="47" parent="4" name="K_person">
+        <columns>personId</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="48" parent="4" name="UK_company_person">
+        <columns>companyId
+personId</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="49" parent="4" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="50" parent="4" name="UK_company_person">
+        <columns>companyId
+personId</columns>
+        <underlying-index>UK_company_person</underlying-index>
+      </key>
+      <foreign-key id="51" parent="4" name="FK_companyPerson_companyId">
+        <columns>companyId</columns>
+        <ref-key>~.company.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="52" parent="4" name="FK_companyPerson_personId">
+        <columns>personId</columns>
+        <ref-key>~.person.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="53" parent="5" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="54" parent="5" name="lpTypeId">
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <column id="55" parent="5" name="url">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="56" parent="5" name="name">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="57" parent="5" name="body">
+        <data-type>text</data-type>
+      </column>
+      <column id="58" parent="5" name="metaTitle">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="59" parent="5" name="metaKeywords">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="60" parent="5" name="metaDescription">
+        <data-type>varchar(1000)</data-type>
+      </column>
+      <column id="61" parent="5" name="semanticKernel">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <index id="62" parent="5" name="K_lpTypeId">
+        <columns>lpTypeId</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="63" parent="5" name="UK_url">
+        <columns>url</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="64" parent="5" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="65" parent="5" name="UK_url">
+        <columns>url</columns>
+        <underlying-index>UK_url</underlying-index>
+      </key>
+      <foreign-key id="66" parent="5" name="FK_landingPage_lpTypeId">
+        <columns>lpTypeId</columns>
+        <ref-key>~.lpType.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="67" parent="6" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="68" parent="6" name="typeId">
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <column id="69" parent="6" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="70" parent="6" name="slug">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <index id="71" parent="6" name="K_typeId">
+        <columns>typeId</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="72" parent="6" name="UK_slug_typeId">
+        <columns>slug
+typeId</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="73" parent="6" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="74" parent="6" name="UK_slug_typeId">
+        <columns>slug
+typeId</columns>
+        <underlying-index>UK_slug_typeId</underlying-index>
+      </key>
+      <foreign-key id="75" parent="6" name="FK_lpType_id">
+        <columns>typeId</columns>
+        <ref-key>~.lpType.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="76" parent="7" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="77" parent="7" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="78" parent="7" name="slug">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="79" parent="7" name="rule">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="80" parent="7" name="route">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="81" parent="7" name="view">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="82" parent="7" name="lpName">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="83" parent="7" name="lpBody">
+        <data-type>text</data-type>
+      </column>
+      <column id="84" parent="7" name="lpMetaTitle">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="85" parent="7" name="lpMetaKeywords">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="86" parent="7" name="lpMetaDescription">
+        <data-type>varchar(1000)</data-type>
+      </column>
+      <index id="87" parent="7" name="UK_slug">
+        <columns>slug</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="88" parent="7" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="89" parent="7" name="UK_slug">
+        <columns>slug</columns>
+        <underlying-index>UK_slug</underlying-index>
+      </key>
+      <column id="90" parent="8" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="91" parent="8" name="landingPageId">
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <column id="92" parent="8" name="blockId">
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <column id="93" parent="8" name="widgetId">
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <column id="94" parent="8" name="sort">
+        <mandatory>1</mandatory>
+        <data-type>smallint(6) unsigned</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="95" parent="8" name="options">
+        <data-type>text</data-type>
+      </column>
+      <index id="96" parent="8" name="K_blockId">
+        <columns>blockId</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="97" parent="8" name="K_lpId_blockId_sort">
+        <columns>landingPageId
+blockId
+sort</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="98" parent="8" name="K_widgetId">
+        <columns>widgetId</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="99" parent="8" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="100" parent="8" name="FK_lpBlock_id">
+        <columns>blockId</columns>
+        <ref-key>~.lpBlock.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="101" parent="8" name="FK_lpWidget_landingPageId">
+        <columns>landingPageId</columns>
+        <ref-key>~.landingPage.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="102" parent="8" name="FK_widget_id">
+        <columns>widgetId</columns>
+        <ref-key>~.widget.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="103" parent="9" name="version">
+        <mandatory>1</mandatory>
+        <data-type>varchar(180)</data-type>
+      </column>
+      <column id="104" parent="9" name="apply_time">
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="105" parent="9" name="PRIMARY">
+        <columns>version</columns>
+        <primary>1</primary>
+      </key>
+      <column id="106" parent="10" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="107" parent="10" name="active">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <column id="108" parent="10" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="109" parent="10" name="slug">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="110" parent="10" name="url">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="111" parent="10" name="description">
+        <data-type>text</data-type>
+      </column>
+      <column id="112" parent="10" name="body">
+        <data-type>text</data-type>
+      </column>
+      <column id="113" parent="10" name="sortOrder">
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <column id="114" parent="10" name="rating">
+        <mandatory>1</mandatory>
+        <data-type>int(11) unsigned</data-type>
+      </column>
+      <index id="115" parent="10" name="K_sorting">
+        <columns>sortOrder
+rating</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="116" parent="10" name="UK_slug">
+        <columns>slug</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="117" parent="10" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="118" parent="10" name="UK_slug">
+        <columns>slug</columns>
+        <underlying-index>UK_slug</underlying-index>
+      </key>
+      <column id="119" parent="11" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="120" parent="11" name="username">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="121" parent="11" name="auth_key">
+        <mandatory>1</mandatory>
+        <data-type>varchar(32)</data-type>
+      </column>
+      <column id="122" parent="11" name="password_hash">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="123" parent="11" name="password_reset_token">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="124" parent="11" name="email">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="125" parent="11" name="status">
+        <mandatory>1</mandatory>
+        <data-type>smallint(6)</data-type>
+        <default-expression>&apos;10&apos;</default-expression>
+      </column>
+      <column id="126" parent="11" name="created_at">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="127" parent="11" name="updated_at">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="128" parent="11" name="balance">
+        <mandatory>1</mandatory>
+        <data-type>decimal(10)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <index id="129" parent="11" name="email">
+        <columns>email</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="130" parent="11" name="password_reset_token">
+        <columns>password_reset_token</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="131" parent="11" name="username">
+        <columns>username</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="132" parent="11" name="email">
+        <columns>email</columns>
+        <underlying-index>email</underlying-index>
+      </key>
+      <key id="133" parent="11" name="password_reset_token">
+        <columns>password_reset_token</columns>
+        <underlying-index>password_reset_token</underlying-index>
+      </key>
+      <key id="134" parent="11" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="135" parent="11" name="username">
+        <columns>username</columns>
+        <underlying-index>username</underlying-index>
+      </key>
+      <column id="136" parent="12" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="137" parent="12" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="138" parent="12" name="class">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="139" parent="12" name="isFilter">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1) unsigned</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <key id="140" parent="12" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>
