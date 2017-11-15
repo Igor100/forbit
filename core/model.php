@@ -11,10 +11,11 @@ class Model
     /**
      * Model constructor.
      */
-    private function __construct () {
+    private function __construct()
+    {
         try {
             self::$_pdo = new PDO(
-                'mysql:host=' . CONFIG_DBSERVER. ';port=' . CONFIG_DBPORT . ';dbname=' . CONFIG_DATABASE,
+                'mysql:host=' . CONFIG_DBSERVER . ';port=' . CONFIG_DBPORT . ';dbname=' . CONFIG_DATABASE,
                 CONFIG_DBUSER, CONFIG_DBPASSWORD, [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]
             );
         } catch (\PDOException $e) {
@@ -23,8 +24,13 @@ class Model
         }
     }
 
-    private function __clone () {}
-    private function __wakeup () {}
+    private function __clone()
+    {
+    }
+
+    private function __wakeup()
+    {
+    }
 
     /**
      * @return Model|null|PDO
@@ -77,10 +83,15 @@ class Model
         }
     }
 
+    /** гкнкерация условий запроса
+     * @param array $data
+     * @param string $glue
+     * @return string
+     */
     private static function combine($data = array(), $glue = ' AND ')
     {
         if (!isset($data)) return '1 = 1';
-        return implode($glue, array_map(function($k, $v) {
+        return implode($glue, array_map(function ($k, $v) {
             if ($v === '0000-00-00 00:00:00') {
                 $v = 'NULL';
             } elseif (!is_numeric($v)) {
@@ -90,7 +101,7 @@ class Model
         }, array_keys($data), $data));
     }
 
-    /**
+    /** генерация полей выборки запроса
      * @param  mixed $fieldNames
      */
     protected function createFieldNames($fieldNames)
@@ -98,20 +109,19 @@ class Model
         if (is_string($fieldNames)) {
             if ($fieldNames != '*') {
                 $fieldNames = str_replace('`', '', $fieldNames);
-                $fieldNames = '`'. $fieldNames .'`';
+                $fieldNames = '`' . $fieldNames . '`';
             }
-        }
-        elseif (is_array($fieldNames)) {
+        } elseif (is_array($fieldNames)) {
             foreach ($fieldNames as &$fieldName) {
                 $fieldName = str_replace('`', '', $fieldName);
-                $fieldName = '`'. $fieldName .'`';
+                $fieldName = '`' . $fieldName . '`';
             }
             $fieldNames = implode(',', $fieldNames);
         }
         return $fieldNames;
     }
 
-    /**
+    /** выборка по полю id
      * @param integer $id
      * @param mixed $fieldNames
      * @return mixed
@@ -120,7 +130,7 @@ class Model
     {
         $fieldNames = $this->createFieldNames($fieldNames);
         return $this->run(
-            'SELECT ' . $fieldNames . ' FROM ' . get_called_class()::$TABLE_NAME .' WHERE id = ?', [$id])->fetch();
+            'SELECT ' . $fieldNames . ' FROM ' . get_called_class()::$TABLE_NAME . ' WHERE id = ?', [$id])->fetch();
     }
 
     /**
@@ -142,9 +152,9 @@ class Model
     {
         $fieldNames = $this->createFieldNames($fieldNames);
         return $this->run(
-             ' SELECT '.$fieldNames.
-             ' FROM `'.get_called_class()::$TABLE_NAME.
-             '` WHERE '.self::combine($conditions), [])->fetch();
+            ' SELECT ' . $fieldNames .
+            ' FROM `' . get_called_class()::$TABLE_NAME .
+            '` WHERE ' . self::combine($conditions), [])->fetch();
     }
- 
+
 }

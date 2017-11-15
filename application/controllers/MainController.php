@@ -7,66 +7,66 @@ use SimpleLogger\File;
 class MainController extends Controller
 {
     /**
-     *
+     * управление и рендер баланса
      */
     public function actionIndex()
     {
         if (isset($_SESSION['udata'])) {
             $user = new User();
             $log = new File('log.txt');
-            $ammount = iniPOST('payout', 0);
-            if (($ammount > 0) && ($ammount < $_SESSION['udata']['balance'])) {
-               if ($user->payout($ammount, $_SESSION['udata']['id'])) {
-                   $log->log('1', 'Списано: '.$ammount);
-                   absRedirect('/');
-               } else
-                   $log->log('1', 'Списать не удалось: '.$ammount);
-            } else {
-                $error = $user->validator->checkPrice($ammount);
-                if($error != '')
-                    $log->log('1', $error);
-                else
-                     $log->log('1', 'Недостаточно средств. Заказано: '.$ammount.' баланс: '.$_SESSION['udata']['balance']);
-            }
+            $ammount = helper::iniPOST('payout', 0);
+            $error = $user->validator->checkPrice($ammount);
+            if ($error == '') {
+                if ($ammount < $_SESSION['udata']['balance']) {
+                    if ($user->payout($ammount, $_SESSION['udata']['id'])) {
+                        session_start(); // extra session_start
+                        $_SESSION['udata']['balance'] = $_SESSION['udata']['balance'] - $ammount;
+                        session_write_close(); // extra session_close
+                        $log->log('1', 'Списано: ' . $ammount);
+                    } else
+                        $log->log('1', 'Списать не удалось: ' . $ammount);
+                } else
+                    $log->log('1', 'Недостаточно средств. Заказано: ' . $ammount . ' баланс: ' . $_SESSION['udata']['balance']);
+            } else
+                $log->log('1', $error);
+
             $this->render('index', ['data' => $user->find($_SESSION['udata']['id'])]);
-        } else absRedirect('main/login');
+        } else helper::absRedirect('main/login');
     }
 
     /**
-     *
+     * авторизация
      */
     public function actionLogin()
     {
-        $login = iniPOST('login', '');
+        $login = helper::iniPOST('login', '');
         if (!empty($login)) {
-            $user = new User();
-            $result = $user->getUserData([
-                'username' => $login,
-                'password_hash' => iniPOST('password')
-            ]);
-            if(is_array($result)) {
-                $_SESSION['udata'] = $result;
-                if(isset($_SESSION['udata'])) {
-                    session_write_close();
-                    absRedirect('main/index');
-                    return;
-                }
+            if (!isset($_SESSION['udata'])) {
+                $user = new User();
+                $result = $user->getUserData([
+                    'username' => $login,
+                    'password_hash' => helper::iniPOST('password')
+                ]);
+                if (is_array($result))
+                    $_SESSION['udata'] = $result;
             }
-        } else {
             if (isset($_SESSION['udata'])) {
                 session_write_close();
-                absRedirect('main/index');
+                helper::absRedirect('main/index');
                 return;
             }
         }
         $this->render('login');
     }
 
+    /**
+     * выход
+     */
     public static function actionLogout()
     {
         session_destroy();
         session_unset();
-        absRedirect('/');
+        helper::absRedirect('/');
     }
 }
 

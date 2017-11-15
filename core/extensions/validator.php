@@ -1,15 +1,12 @@
 <?php
 
-//namespace extensions;
-
 class Validator
 {
-
     /**
      * @access protected
      * @var array
      */
-    protected  $_config;
+    protected $_config;
 
     /**
      * Конструктор
@@ -31,14 +28,13 @@ class Validator
     public function noEmpty($text)
     {
         $text = trim($text);
-        if(empty($text))
+        if (empty($text))
             return 'Поле не заполнено';
     }
 
     public function checkSelectField($text)
     {
-        if ((trim($text) == 'Выбрать из списка') || (empty($text)))
-        {
+        if ((trim($text) == 'Выбрать из списка') || (empty($text))) {
             return 'Поле не заполнено';
         }
     }
@@ -52,11 +48,11 @@ class Validator
     public function checkLogin($login)
     {
         $login = trim($login);
-        if(empty($login))
+        if (empty($login))
             return 'Нет логина';
-        if(mb_strlen($login, 'utf-8') < $this->_config['min_login'])
+        if (mb_strlen($login, 'utf-8') < $this->_config['min_login'])
             return 'Логин слишком короткий';
-        if(mb_strlen($login, 'utf-8') > $this->_config['max_login'])
+        if (mb_strlen($login, 'utf-8') > $this->_config['max_login'])
             return 'Логин слишком длинный';
     }
 
@@ -70,11 +66,11 @@ class Validator
      */
     public function checkPassword($password, $repeat)
     {
-        if(empty($password))
+        if (empty($password))
             return 'Нет пароля';
 
-        if(mb_strlen($password, 'utf-8') < $this->_config['min_password'])
-            return 'Пароль должен содержать не менее '. $this->_config['min_password'] .' символов.';
+        if (mb_strlen($password, 'utf-8') < $this->_config['min_password'])
+            return 'Пароль должен содержать не менее ' . $this->_config['min_password'] . ' символов.';
 
         if (($password !== $repeat) && ((strlen($password) > 0) || (strlen($repeat) > 0)))
             return 'Пароли не совпадают';
@@ -89,7 +85,7 @@ class Validator
      */
     public function checkOldPassword($password, $old_password)
     {
-        if(Crypt::hash($old_password, $password) !== $password)
+        if (Crypt::hash($old_password, $password) !== $password)
             return 'Старый пароль указан неверно';
     }
 
@@ -101,10 +97,10 @@ class Validator
      */
     public function checkPincode($pincode)
     {
-        if(empty($pincode))
+        if (empty($pincode))
             return 'Нет пинкода';
 
-        if(mb_strlen($pincode, 'utf8') != $this->_config['len_pincode'])
+        if (mb_strlen($pincode, 'utf8') != $this->_config['len_pincode'])
             return 'Невалидный пинкод';
     }
 
@@ -117,7 +113,7 @@ class Validator
      */
     public function comparePincode($pincode, $old_pincode)
     {
-        if($pincode !== $old_pincode)
+        if ($pincode !== $old_pincode)
             return 'Пинкод указан неверно';
     }
 
@@ -130,22 +126,11 @@ class Validator
 
     public function checkEmail($email)
     {
-        if(empty($email))
+        if (empty($email))
             return 'Не указан E-mail';
-        if(!$this->validateEmail($email))
+        if (!$this->validateEmail($email))
             return 'Невалидный E-mail';
     }
-
-
-/*    public function checkEmailRestore($email, &$id = null)
-    {
-        if(empty($email))
-            return 'Не указан E-mail';
-        if(!$this->validateEmail($email))
-            return 'Невалидный E-mail';
-        if(!$this->_checkDubleRestore($email, 'email', $id))
-            return 'E-mail не зарегистрирован ';
-    }*/
 
     /**
      * Проверка валидности Email
@@ -169,9 +154,9 @@ class Validator
      */
     public function checkWebmoney($webmoney)
     {
-        if(empty($webmoney))
+        if (empty($webmoney))
             return 'Нет Вебмани';
-        if(!preg_match("/^[R]\d{12}$/", $webmoney))   // - только R "/^[RZ]\d{12}$/"
+        if (!preg_match("/^[R]\d{12}$/", $webmoney))   // - только R "/^[RZ]\d{12}$/"
             return 'Невалидный Вебмани';
     }
 
@@ -183,15 +168,21 @@ class Validator
      */
     public function checkErrors($errors)
     {
-        $errors = array_filter($errors, function($v){return (bool)$v;});
+        $errors = array_filter($errors, function ($v) {
+            return (bool)$v;
+        });
         return !empty($errors);
     }
+
     public function checkError($error)
     {
         return !empty($error);
     }
 
-
+    /** Проверка корректности суммы
+     * @param float $price
+     * @return float string
+     */
     public function checkPrice($price)
     {
         if (empty($price)) return 'Не указана сумма';
@@ -199,7 +190,5 @@ class Validator
             return 'Не правильная сумма';
         return '';
     }
-
-
 
 }

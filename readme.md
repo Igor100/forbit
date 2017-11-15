@@ -13,7 +13,7 @@ CREATE TABLE user (
   username varchar(255) NOT NULL,
   auth_key varchar(32) NOT NULL,
   password_hash varchar(255) NOT NULL,
-  balance decimal(10, 0) NOT NULL DEFAULT 0,
+  balance decimal(20, 8) NOT NULL DEFAULT 0,
   PRIMARY KEY (id),
   UNIQUE INDEX email (email),
   UNIQUE INDEX password_reset_token (password_reset_token),

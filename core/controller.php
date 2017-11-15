@@ -11,6 +11,6 @@ class Controller
     {
         $controllerName = strtolower(str_replace('Controller', '', get_class($this)));
         $view = DIR_APP_VIEWS . DIRECTORY_SEPARATOR . $controllerName . DIRECTORY_SEPARATOR . $view . '.php';
-        include DIR_APP_VIEWS . DIRECTORY_SEPARATOR. 'layouts'.DIRECTORY_SEPARATOR . $this->layout .'.php';
+        include_once DIR_APP_VIEWS . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . $this->layout . '.php';
     }
 }

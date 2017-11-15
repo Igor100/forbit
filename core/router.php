@@ -22,7 +22,7 @@ class Router
         $action_name = 'action' . ucfirst($action_name);
         $file_controller = DIR_APP_CONTROLLERS . DIRECTORY_SEPARATOR . $controller_name . '.php';
         if (file_exists($file_controller)) {
-            include $file_controller;
+            include_once $file_controller;
         } else {
             header('Location: /error/404');
             exit;

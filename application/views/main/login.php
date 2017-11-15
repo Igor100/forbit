@@ -10,13 +10,16 @@
         padding: 15px;
         margin: 0 auto;
     }
+
     .form-signin .form-signin-heading,
     .form-signin .checkbox {
         margin-bottom: 10px;
     }
+
     .form-signin .checkbox {
         font-weight: 400;
     }
+
     .form-signin .form-control {
         position: relative;
         box-sizing: border-box;
@@ -24,14 +27,17 @@
         padding: 10px;
         font-size: 16px;
     }
+
     .form-signin .form-control:focus {
         z-index: 2;
     }
+
     .form-signin input[type="text"] {
         margin-bottom: 5px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
+
     .form-signin input[type="password"] {
         margin-bottom: 10px;
         border-top-left-radius: 0;
